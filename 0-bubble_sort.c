@@ -13,7 +13,7 @@ void bubble_sort(int *array, size_t size)
 
 	while (size > 0)
 	{
-		if (array && index < size)
+		if (array && index < size - 1)
 		{
 			if (array[index] > array[index + 1])
 			{
