@@ -1,7 +1,8 @@
 #include "sort.h"
 /**
- * insertion_sort_list - Sort a dlinked list using bubble sort
- * @list: head of the list
+ * selection_sort - Sort an array with selection method
+ * @array: array to sort
+ * @size: limit of data
  */
 
 void selection_sort(int *array, size_t size)
