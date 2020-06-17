@@ -1,22 +1,21 @@
 #include "sort.h"
 /**
- * insertion_sort_list - Sort a dlinked list using bubble sort
+ * extract_node - extract the next node
  * @list: head of the list
  */
 
 listint_t *extract_node(listint_t **runner)
 {
-    listint_t *insert;
+    listint_t *insert = *runner;
 
-	insert = (*runner)->next;
 	if (insert->next)
 	{
-		(*runner)->next = insert->next;
-		insert->next->prev = (*runner);
+		insert->prev->next = insert->next;
+		insert->next->prev = insert->prev;
 	}
 	else
 	{
-		(*runner)->next = NULL;
+		insert->prev->next = NULL;
 	}
 	return(insert);
 }

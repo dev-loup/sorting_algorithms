@@ -6,35 +6,31 @@
 
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *runner = *list, *insert, *backrun;
+	listint_t *runner, *keeper;
 
-	while (runner->next)
+	if (!list || !*list || !(*list)->next)
+		return;
+
+	keeper = (*list)->next;
+	runner = keeper;
+
+	while (runner)
 	{
-		if (runner->next->n < runner->n)
+		runner = runner->next;
+		while (keeper->prev && keeper->n < keeper->prev->n)
 		{
-			insert = extract_node(&runner);
-			backrun = runner;
-			while (backrun->prev)
-			{
-				if (backrun->n < insert->n)
-				{
-					insert->next = backrun->next;
-					insert->prev = backrun;
-					backrun->next = insert;
-					insert->next->prev = insert;
-					break;
-				}
-				backrun = backrun->prev;
-			}
-			if (!backrun->prev)
-			{
-				insert->next = *list;
-				insert->prev = *list;
-				*list = insert;
-			}
+			keeper->prev->next = keeper->next;
+			if (keeper->next)
+				keeper->next->prev = keeper->prev;
+			keeper->next = keeper->prev;
+			keeper->prev = keeper->next->prev;
+			keeper->next->prev = keeper;
+			if (keeper->prev)
+				keeper->prev->next = keeper;
+			else
+				*list = keeper;
 			print_list(*list);
 		}
-		else
-			runner = runner->next;
+		keeper = runner;
 	}
 }
